@@ -10,13 +10,18 @@ module.exports = {
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
+      fontFamily: {
+        regular: ["PlusJakartaSans"],
+        heading: ["PlayfairDisplay"],
+      },
       colors: {
-        primary: "#030014",
-        accent: "#AB8BFF",
+        primary: "#1B3A5C",
+        accent: "#C07A3A",
+        bg: "#F4F1EB",
         secondary: "#151312",
         placeholder: "##A8B5DB",
         surface: "##0F0D23",
-        text: "##FFFFFF",
+        text: "#18141A",
         textSecondary: "#A8B5DB",
         light: {
           100: "#d6c6ff",
