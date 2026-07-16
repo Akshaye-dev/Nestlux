@@ -11,21 +11,27 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        regular: ["PlusJakartaSans"],
-        heading: ["PlayfairDisplay"],
+        PlusJakartaSans: ["PlusJakartaSans"],
+        PlayfairDisplay: ["PlayfairDisplay"],
+        PlusJakartaSansSemiBold: ["PlusJakartaSansSemiBold"],
       },
       colors: {
         primary: "#1B3A5C",
-        accent: "#C07A3A",
+        accent: "#c2410c",
         bg: "#F4F1EB",
         secondary: "#151312",
-        placeholder: "##A8B5DB",
-        surface: "##0F0D23",
+        placeholder: "#A8B5DB",
+        surface: "#1B3A5C",
         text: "#18141A",
-        textSecondary: "#A8B5DB",
+        divider: "#E5E5E5",
+        textSecondary: "#666666",
+        input: {
+          background: "#F3F3F3",
+          text: "#666666",
+        },
         light: {
           100: "#d6c6ff",
-          200: "a8b5db",
+          200: "#a8b5db",
           300: "#9ca4ab",
         },
         dark: {
