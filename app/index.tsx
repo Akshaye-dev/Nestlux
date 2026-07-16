@@ -14,7 +14,7 @@ import {
 export default function Index() {
   const router = useRouter();
   const { isReady, animatedStyles } = useSplashController({
-    onSplashFinished: () => router.replace("/signup"),
+    onSplashFinished: () => router.replace("/signin"),
   });
   if (!isReady) {
     return null; // Render nothing until the splash screen is ready
