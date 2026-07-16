@@ -33,4 +33,11 @@ export const AppStrings = {
     continueWith: "or continue with",
     continueWithGoogle: "Continue with Google",
   },
+  forgotPassword: {
+    forgotPasswordText: "Forgot Password",
+    description: "Enter your email and we'll send you a verification code",
+    emailLabel: "Email Address",
+    emailPlaceholder: "sarah@example.com",
+    sendCode: "Send Code",
+  },
 };

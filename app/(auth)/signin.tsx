@@ -37,9 +37,11 @@ const Signin = () => {
           icon={require("../../assets/icon/visibility-icon.png")}
           secureTextEntry={true}
         />
-        <Text className="text-base font-PlusJakartaSansSemiBold text-surface self-end mt-4 mb-4">
-          {AppStrings.signin.forgotPassword}
-        </Text>
+        <Link href="/forgotpassword" asChild>
+          <Text className="text-base font-PlusJakartaSansSemiBold text-surface self-end mt-4 mb-4">
+            {AppStrings.signin.forgotPassword}
+          </Text>
+        </Link>
         <CustomButton
           buttonText={AppStrings.signin.signText}
           color="bg-surface"

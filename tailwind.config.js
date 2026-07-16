@@ -22,6 +22,7 @@ module.exports = {
         secondary: "#151312",
         placeholder: "#A8B5DB",
         surface: "#1B3A5C",
+        surfaceSecondary: "#D5E0EA",
         text: "#18141A",
         divider: "#E5E5E5",
         textSecondary: "#666666",

@@ -5,6 +5,7 @@ export const AppColors = {
   secondary: "#151312",
   placeholder: "#A8B5DB",
   surface: "#1B3A5C",
+  surfaceSecondary: "#D5E0EA",
   text: "#18141A",
   textSecondary: "#A8B5DB",
   input: {
