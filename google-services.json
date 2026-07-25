@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "585409323382",
+    "project_id": "nestlux-fa85b",
+    "storage_bucket": "nestlux-fa85b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585409323382:android:371fd59bbbae40cfb89a57",
+        "android_client_info": {
+          "package_name": "com.akshaybuilds.Nestlux"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585409323382-dvjq8b011v1qlgkfimjtkuhbejvugqtp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.akshaybuilds.Nestlux",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "585409323382-a4g11dug12bfbtul4naq9tmm0snijgv8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvMZmwSgaIs6vOtjovKo9KT7V2vDB8QRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585409323382-a4g11dug12bfbtul4naq9tmm0snijgv8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "585409323382-vv4u5nnko25kakt5hl6d3t4i2a7dnb7p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.akshaybuilds.Nestlux"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

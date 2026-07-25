@@ -11,9 +11,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        PlusJakartaSans: ["PlusJakartaSans"],
-        PlayfairDisplay: ["PlayfairDisplay"],
-        PlusJakartaSansSemiBold: ["PlusJakartaSansSemiBold"],
+        "plus-jakarta-sans": ["PlusJakartaSans"],
+        "playfair-display": ["PlayfairDisplay"],
+        "plus-jakarta-sans-semi-bold": ["PlusJakartaSansSemiBold"],
       },
       colors: {
         primary: "#1B3A5C",

@@ -1,26 +1,27 @@
 import { AppColors } from "@/constants/colors";
-import React from "react";
-import {
-  Image,
-  ImageSourcePropType,
-  KeyboardTypeOptions,
-  TextInput,
-  View,
-} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { KeyboardTypeOptions, Pressable, TextInput, View } from "react-native";
 
 type InputTextProps = {
   placeholder?: string;
-  icon?: ImageSourcePropType;
+  icon?: React.ReactNode;
   keyboardType?: KeyboardTypeOptions;
   secureTextEntry?: boolean;
+  onChangeText?: (text: string) => void;
+  value?: string;
+  isPassword?: boolean;
 };
 
 const InputText = ({
   placeholder,
   icon,
   keyboardType,
-  secureTextEntry,
+  onChangeText,
+  value,
+  isPassword,
 }: InputTextProps) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
   return (
     <View className="flex-row justify-between items-center w-full h-12 bg-input-background rounded-3xl px-4">
       <TextInput
@@ -28,12 +29,19 @@ const InputText = ({
         placeholderTextColor={AppColors.input.text}
         multiline={false}
         className="flex-1 text-black text-lg font-PlusJakartaSans"
-        onChangeText={() => {}}
+        onChangeText={onChangeText}
         keyboardType={keyboardType}
-        secureTextEntry={secureTextEntry}
+        secureTextEntry={isPassword && !passwordVisible}
+        value={value}
       />
-      {icon && (
-        <Image source={icon} className="w-6 h-6 p-2" resizeMode="contain" />
+      {isPassword && (
+        <Pressable onPress={() => setPasswordVisible((prev) => !prev)}>
+          {!passwordVisible ? (
+            <Ionicons name="eye-off-outline" size={24} color="black" />
+          ) : (
+            <Ionicons name="eye-outline" size={24} color="black" />
+          )}
+        </Pressable>
       )}
     </View>
   );

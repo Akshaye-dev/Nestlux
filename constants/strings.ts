@@ -17,9 +17,11 @@ export const AppStrings = {
     signUpLink: "Sign Up",
     continueWith: "or continue with",
     continueWithGoogle: "Continue with Google",
+    signingIn: "Signing In...",
   },
   signup: {
     createAccount: "Create Account",
+    pleaseWait: "Please wait...",
     description: "Join thousands of home seekers",
     nameLabel: "Full Name",
     emailLabel: "Email Address",
@@ -40,4 +42,6 @@ export const AppStrings = {
     emailPlaceholder: "sarah@example.com",
     sendCode: "Send Code",
   },
+  error: "error",
+  authCodes: {},
 };

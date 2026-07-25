@@ -15,7 +15,7 @@ const AuthHeader = () => {
         <View className="w-12 h-12 rounded-full bg-accent items-center justify-center">
           <Ionicons name="home-outline" size={20} color="white" />
         </View>
-        <Text className="ml-2 text-xl tracking-[0.18em] text-white font-PlusJakartaSansSemiBold">
+        <Text className="ml-2 text-xl tracking-[0.18em] text-white font-plus-jakarta-sans-semi-bold">
           {AppStrings.appName}
         </Text>
       </View>
