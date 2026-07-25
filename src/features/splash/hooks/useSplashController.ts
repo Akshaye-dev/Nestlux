@@ -1,3 +1,4 @@
+import { Fonts } from "@/src/shared/assets/fonts";
 import { useFonts } from "expo-font";
 import * as NavigationBar from "expo-navigation-bar";
 import * as SplashScreen from "expo-splash-screen";
@@ -31,9 +32,9 @@ export default function useSplashController(
   const loadingScaleAnim = useRef(new Animated.Value(0)).current; //Scale animation for loading screen
   const loadingOpacityAnim = useRef(new Animated.Value(0)).current; //Opacity animation for loading screen
   const [fontsLoaded, fontsError] = useFonts({
-    PlusJakartaSans: require("../assets/images/fonts/PlusJakartaSans.ttf"),
-    PlayfairDisplay: require("../assets/images/fonts/PlayfairDisplay.ttf"),
-    PlusJakartaSansSemiBold: require("../assets/images/fonts/PlusJakartaSans-SemiBold.ttf"),
+    PlusJakartaSans: Fonts.plusJakartaSans,
+    PlayfairDisplay: Fonts.playfairDisplay,
+    PlusJakartaSansSemiBold: Fonts.plusJakartaSansSemiBold,
   });
   const isReady = fontsLoaded || !!fontsError;
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { AppColors } from "@/constants/colors";
+import { AppColors } from "@/src/shared/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { KeyboardTypeOptions, Pressable, TextInput, View } from "react-native";

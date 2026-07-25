@@ -1,4 +1,7 @@
-import { AUTH_MESSAGES, FIREBASE_ERROR_MESSAGES } from "@/constants/messages";
+import {
+  AUTH_MESSAGES,
+  FIREBASE_ERROR_MESSAGES,
+} from "@/src/shared/constants/messages";
 import { FirebaseError } from "firebase/app";
 export const getFirebaseErrorMessage = (error: unknown) => {
   if (!(error instanceof FirebaseError)) {

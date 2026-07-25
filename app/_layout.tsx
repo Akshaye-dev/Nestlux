@@ -1,4 +1,4 @@
-import { AuthProvider } from "@/context/AuthContext";
+import { AuthProvider } from "@/src/providers/AuthProvider";
 import { Stack } from "expo-router";
 import "./global.css";
 
@@ -7,7 +7,7 @@ export default function RootLayout() {
     <AuthProvider>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name="index"
+          name="(tabs)"
           options={{
             animation: "fade",
             animationDuration: 500,

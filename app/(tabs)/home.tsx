@@ -1,15 +1,9 @@
-import { useGoogleSignIn } from "@/hooks/useGoogleSignIn";
+import HomeScreen from "@/src/features/home/screens/HomeScreen";
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 const Home = () => {
-  const { googleSignOut } = useGoogleSignIn();
-  return (
-    <View>
-      <Text>Home</Text>
-      <Button title="Sign Out" onPress={googleSignOut} />
-    </View>
-  );
+  return <HomeScreen />;
 };
 
 export default Home;

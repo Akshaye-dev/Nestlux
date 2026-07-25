@@ -1,4 +1,5 @@
-import { AppStrings } from "@/constants/strings";
+import { Images } from "@/src/shared/assets/images";
+import { AppStrings } from "@/src/shared/constants/strings";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
@@ -6,10 +7,7 @@ import { ImageBackground, StyleSheet, Text, View } from "react-native";
 
 const AuthHeader = () => {
   return (
-    <ImageBackground
-      source={require("../assets/images/bg-image.jpg")}
-      className="flex-[1] w-full"
-    >
+    <ImageBackground source={Images.background} className="flex-[1] w-full">
       <View style={styles.overlay} />
       <View className="flex-row justify-start items-center mt-16 ml-4">
         <View className="w-12 h-12 rounded-full bg-accent items-center justify-center">

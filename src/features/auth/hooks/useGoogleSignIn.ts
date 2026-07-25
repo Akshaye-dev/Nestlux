@@ -1,5 +1,6 @@
-import { AUTH_MESSAGES } from "@/constants/messages";
-import { getFirebaseErrorMessage } from "@/utils/getFirebaseErrorMessage";
+import { getFirebaseErrorMessage } from "@/src/features/auth/utils/getFirebaseErrorMessage";
+import { AUTH_MESSAGES } from "@/src/shared/constants/messages";
+import { auth } from "@/src/shared/services/firebase/firebase";
 import {
   GoogleSignin,
   isErrorWithCode,
@@ -7,13 +8,10 @@ import {
   statusCodes,
 } from "@react-native-google-signin/google-signin";
 import { useRouter } from "expo-router";
-import {
-  GoogleAuthProvider,
-  getAuth,
-  signInWithCredential,
-} from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { Alert } from "react-native";
+import { signInWithGoogleCredential } from "../services/authService";
 
 const webClientId = process.env.EXPO_PUBLIC_WEB_CLIENT_ID;
 
@@ -75,8 +73,8 @@ export const useGoogleSignIn = () => {
 
       const googleCredential = GoogleAuthProvider.credential(idToken);
 
-      await signInWithCredential(getAuth(), googleCredential);
-      router.replace("/home");
+      await signInWithGoogleCredential(googleCredential);
+      // router.replace("/home");
     } catch (error) {
       console.error("Google Sign-In Error:", error);
 
@@ -97,7 +95,7 @@ export const useGoogleSignIn = () => {
     try {
       ensureGoogleSigninConfigured();
       await GoogleSignin.signOut(); // Disconnect Google session
-      await getAuth().signOut(); // Sign out from Firebase as well and clear the user session from persistent storage
+      await auth.signOut(); // Sign out from Firebase as well and clear the user session from persistent storage
       router.replace("/signin");
     } catch (error) {
       console.error("Google Sign-Out Error:", error);
