@@ -1,6 +1,5 @@
 import AuthHeader from "@/src/features/auth/components/AuthHeader";
 import { useGoogleSignIn } from "@/src/features/auth/hooks/useGoogleSignIn";
-import { signUpWithEmail } from "@/src/features/auth/services/authService";
 import { getFirebaseErrorMessage } from "@/src/features/auth/utils/getFirebaseErrorMessage";
 import { Icons } from "@/src/shared/assets/icons";
 import CustomButton from "@/src/shared/components/CustomButton";
@@ -8,35 +7,28 @@ import InputText from "@/src/shared/components/InputText";
 import { FORM_MESSAGES } from "@/src/shared/constants/messages";
 import { AppStrings } from "@/src/shared/constants/strings";
 import { useRouter } from "expo-router";
-import { FirebaseError } from "firebase/app";
 import { useState } from "react";
 import { KeyboardAvoidingView, ScrollView, Text, View } from "react-native";
+import { useEmailSignUp } from "../hooks/useEmailSignUp";
 
 const SignupScreen = () => {
   const { googleSignIn, googleLoading } = useGoogleSignIn();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { signUp, loading } = useEmailSignUp({ name, email, password });
 
-  const signUpHandler = () => {
+  const signUpHandler = async () => {
     if (!email || !password || !name) {
       alert(FORM_MESSAGES.EMPTY_FIELDS);
       return;
     }
-    signUp();
-  };
 
-  const signUp = async () => {
-    setLoading(true);
     try {
-      await signUpWithEmail(email, password);
+      await signUp();
     } catch (error) {
-      const err = error as FirebaseError;
-      alert(getFirebaseErrorMessage(err));
-    } finally {
-      setLoading(false);
+      alert(getFirebaseErrorMessage(error));
     }
   };
 

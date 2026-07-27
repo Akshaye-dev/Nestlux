@@ -1,6 +1,5 @@
 import AuthHeader from "@/src/features/auth/components/AuthHeader";
 import { useGoogleSignIn } from "@/src/features/auth/hooks/useGoogleSignIn";
-import { signInWithEmail } from "@/src/features/auth/services/authService";
 import { getFirebaseErrorMessage } from "@/src/features/auth/utils/getFirebaseErrorMessage";
 import { Icons } from "@/src/shared/assets/icons";
 import CustomButton from "@/src/shared/components/CustomButton";
@@ -11,30 +10,24 @@ import { Link, useRouter } from "expo-router";
 import { FirebaseError } from "firebase/app";
 import React, { useState } from "react";
 import { KeyboardAvoidingView, ScrollView, Text, View } from "react-native";
+import { useEmailSignIn } from "../hooks/useEmailSignIn";
 
 const SigninScreen = () => {
   const router = useRouter();
   const { googleSignIn, googleLoading } = useGoogleSignIn();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { signIn, loading } = useEmailSignIn(email, password);
 
-  const signInHandler = () => {
+  const signInHandler = async () => {
     if (!email || !password) {
       alert(FORM_MESSAGES.EMPTY_EMAIL_PASSWORD);
       return;
     }
-    signIn();
-  };
-  const signIn = async () => {
     try {
-      setLoading(true);
-      await signInWithEmail(email, password);
+      await signIn();
     } catch (error) {
-      const err = error as FirebaseError;
-      alert(getFirebaseErrorMessage(err));
-    } finally {
-      setLoading(false);
+      alert(getFirebaseErrorMessage(error as FirebaseError));
     }
   };
 

@@ -1,11 +1,10 @@
 import useSplashController from "@/src/features/splash/hooks/useSplashController";
-import { useAuth } from "@/src/providers/AuthProvider";
+import { useSplashNavigation } from "@/src/features/splash/hooks/useSplashNavigation";
 import { Images } from "@/src/shared/assets/images";
 import { AppStrings } from "@/src/shared/constants/strings";
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Animated,
   ImageBackground,
@@ -15,27 +14,14 @@ import {
 } from "react-native";
 
 export default function SplashScreen() {
-  const router = useRouter();
   const [animatedFinished, setAnimatedFinished] = useState(false);
-  const { loading, user } = useAuth();
   const { isReady, animatedStyles } = useSplashController({
     onSplashFinished: () => {
       setAnimatedFinished(true);
     },
   });
 
-  useEffect(() => {
-    if (animatedFinished) {
-      if (loading) {
-        return; // Wait until firebase auth state is determined before navigating to the next screen
-      }
-      if (user) {
-        router.replace("/home");
-      } else {
-        router.replace("/signin");
-      }
-    }
-  }, [animatedFinished, loading, user, router]);
+  useSplashNavigation({ animationFinished: animatedFinished });
 
   if (!isReady) {
     return null; // Do not render react splash screen until the splash screen fonts/components are ready
