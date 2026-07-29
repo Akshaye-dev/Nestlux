@@ -42,6 +42,26 @@ export const AppStrings = {
     emailPlaceholder: "sarah@example.com",
     sendCode: "Send Code",
   },
+  home: {
+    featuredProperties: "Featured Properties",
+    seeAll: "See all >",
+    ourPicks: "Our Picks",
+    featured: "Featured",
+  },
+  wish: {
+    goodMorning: "Good Morning",
+    goodAfternoon: "Good Afternoon",
+    goodEvening: "Good Evening",
+  },
+  picks: {
+    all: "All",
+    house: "House",
+    apartment: "Apartment",
+    villa: "Villa",
+    studio: "Studio",
+  },
+  search: {
+    placeholder: "Search city, neighborhood...",
+  },
   error: "error",
-  authCodes: {},
 };
