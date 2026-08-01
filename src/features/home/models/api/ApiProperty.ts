@@ -1,12 +1,15 @@
-import { ImageSourcePropType } from "react-native";
-
 export interface ApiProperty {
-  id: number;
+  id: string;
   title: string;
-  location: string;
-  price: string;
-  image: ImageSourcePropType;
-  featured: boolean;
-  favorite: boolean;
+  city: string;
+  price: number;
+  imageUrl: string;
+  category: string;
   rating: number;
+  reviewCount: number;
+  listingType: string;
+  propertyType: string;
+  bathrooms: number;
+  bedrooms: number;
+  areaSqFt: number;
 }

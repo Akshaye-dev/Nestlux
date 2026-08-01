@@ -1,7 +1,7 @@
 export const propertyCategories = [
   { id: "all", title: "All", icon: "apps" },
-  { id: "home", title: "Home", icon: "home" },
-  { id: "apartment", title: "Apartments", icon: "business" },
+  { id: "house", title: "House", icon: "home" },
+  { id: "apartment", title: "Apartment", icon: "business" },
   { id: "studio", title: "Studio", icon: "bed" },
-  { id: "other", title: "Others", icon: "grid" },
+  { id: "villa", title: "Villa", icon: "grid" },
 ];

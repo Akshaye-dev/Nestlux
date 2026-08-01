@@ -1,7 +1,13 @@
 import { AppColors } from "@/src/shared/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 
 type PicksCategoriesProps = {
   propertyTypes: {
@@ -10,16 +16,19 @@ type PicksCategoriesProps = {
     icon: string;
   }[];
   onPress: (categoryId: string) => void;
+  isFetching?: boolean;
 };
 
 const PicksCategoryList = ({
   propertyTypes,
   onPress,
+  isFetching = false,
 }: PicksCategoriesProps) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   return (
     <FlatList
       data={propertyTypes}
+      className="mt-12"
       horizontal
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item) => item.id}
@@ -31,7 +40,8 @@ const PicksCategoryList = ({
               setSelectedCategory(item.id);
               onPress(item.id);
             }}
-            className=" mr-2"
+            android_ripple={{ color: "#E5E7EB", foreground: true }}
+            className="rounded-3xl overflow-hidden mr-2"
           >
             {selected ? (
               <View className="flex-row items-center justify-center bg-accent border border-accent px-3 rounded-3xl py-1 ">
@@ -39,6 +49,11 @@ const PicksCategoryList = ({
                 <Text className="text-white text-sm ml-2 font-plus-jakarta-sans ">
                   {item.title}
                 </Text>
+                {isFetching && (
+                  <View className="ml-2">
+                    <ActivityIndicator size="small" color={AppColors.white} />
+                  </View>
+                )}
               </View>
             ) : (
               <View className="flex-row items-center justify-center bg-white rounded-3xl border border-gray-500 px-3 py-1 ">

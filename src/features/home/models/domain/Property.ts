@@ -1,12 +1,15 @@
-import { ImageSourcePropType } from "react-native";
-
 export interface Property {
-  id: number;
+  id: string;
   title: string;
   location: string;
-  price: string;
-  image: ImageSourcePropType;
-  isFeatured: boolean;
-  isFavorite: boolean;
+  price: number;
+  imageUrl: string;
+  category: string;
   rating: number;
+  noOfReviews: number;
+  propertyType: string;
+  listingType: string;
+  noOfBathrooms: number;
+  noOfBedrooms: number;
+  areaSqFt: number;
 }

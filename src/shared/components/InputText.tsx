@@ -1,4 +1,3 @@
-import { AppColors } from "@/src/shared/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { KeyboardTypeOptions, Pressable, TextInput, View } from "react-native";
@@ -11,6 +10,8 @@ type InputTextProps = {
   onChangeText?: (text: string) => void;
   value?: string;
   isPassword?: boolean;
+  placeholderTextColor?: string;
+  multiline?: boolean;
 };
 
 const InputText = ({
@@ -19,16 +20,18 @@ const InputText = ({
   keyboardType,
   onChangeText,
   value,
-  isPassword,
+  isPassword = false,
+  multiline,
+  placeholderTextColor,
 }: InputTextProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   return (
-    <View className="flex-row justify-between items-center w-full h-12 bg-input-background rounded-3xl px-4">
+    <View className="flex-row justify-between items-center w-full h-12 bg-input-background rounded-3xl px-1">
       <TextInput
         placeholder={placeholder}
-        placeholderTextColor={AppColors.input.text}
-        multiline={false}
-        className="flex-1 text-black text-lg font-PlusJakartaSans"
+        placeholderTextColor={placeholderTextColor}
+        multiline={multiline ?? false}
+        className="flex-1 text-black text-lg font-plus-jakarta-sans"
         onChangeText={onChangeText}
         keyboardType={keyboardType}
         secureTextEntry={isPassword && !passwordVisible}
