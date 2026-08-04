@@ -26,7 +26,7 @@ const Search = ({
         router.push("/search");
       }}
     >
-      <View className="flex-row justify-between items-center w-full bg-gray-100 rounded-3xl p-2 border border-gray-500">
+      <View className="flex-row justify-between items-center w-full bg-gray-50 rounded-3xl p-2 border border-gray-500">
         <Ionicons
           name="search"
           size={20}

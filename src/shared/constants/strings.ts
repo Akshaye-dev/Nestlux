@@ -44,7 +44,7 @@ export const AppStrings = {
   },
   home: {
     featuredProperties: "Featured Properties",
-    seeAll: "See all >",
+    seeAll: "See all",
     ourPicks: "Our Picks",
     featured: "Featured",
   },
@@ -62,6 +62,40 @@ export const AppStrings = {
   },
   search: {
     placeholder: "Search city, neighborhood...",
+  },
+  profile: {
+    profile: "My Profile",
+    name: "Sarah Mitchell",
+    email: "sarah@example.com",
+    verified: "Verified Buyer",
+    listings: "Listings",
+    saved: "Saved",
+    reviews: "Reviews",
+    personalInfo: {
+      title: "Personal Information",
+      description: "Edit your profile",
+    },
+    notifications: {
+      title: "Notifications",
+      description: "Manage alerts",
+    },
+    privacy: {
+      title: "Privacy & Security",
+      description: "Control your data",
+    },
+    activity: {
+      title: "Activity History",
+      description: "View your recent activity",
+    },
+    settings: {
+      title: "App Settings",
+      description: "Manage your preferences and app settings",
+    },
+    help: {
+      title: "Help & Support",
+      description: "FAQ, contact us",
+    },
+    logout: "Sign Out",
   },
   error: "error",
 };

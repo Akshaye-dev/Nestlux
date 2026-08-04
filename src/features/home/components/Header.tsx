@@ -11,7 +11,7 @@ const Header = () => {
     <View className="flex-row justify-between items-center mb-4 mt-4">
       <View className="justify-between items-start">
         <View className="flex-row items-center gap-1">
-          <Text className="text-xs font-plus-jakarta-sans-semi-bold text-gray-500">
+          <Text className="text-xs font-plus-jakarta-sans-semi-bold text-gray-600">
             {greeting.text}
           </Text>
           <Ionicons name={greeting.icon} size={16} color={greeting.color} />

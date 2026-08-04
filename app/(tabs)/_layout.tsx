@@ -2,10 +2,25 @@ import { AppColors } from "@/src/shared/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Tabs } from "expo-router";
+import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const queryClient = new QueryClient();
 export default function TabsLayout() {
+  const tabBarIconHandler = (
+    focused: boolean,
+    color: string,
+    size: number,
+    icon: string,
+  ) => {
+    return (
+      <View
+        className={`${focused ? "bg-accentLight  " : "bg-transparent "} rounded-xl px-2 py-1 justify-center items-center `}
+      >
+        <Ionicons name={icon} size={size * 0.7} color={color} />
+      </View>
+    );
+  };
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
@@ -13,42 +28,47 @@ export default function TabsLayout() {
           screenOptions={{
             headerShown: false,
             tabBarActiveTintColor: AppColors.accent,
+            tabBarStyle: {
+              paddingBottom: 4,
+              paddingTop: 4,
+            },
           }}
         >
           <Tabs.Screen
             name="home"
+
             options={{
+              title: "Home",
               animation: "fade",
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="home-outline" size={size} color={color} />
-              ),
-            }}
-          />
-          <Tabs.Screen
-            name="profile"
-            options={{
-              animation: "fade",
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="person-outline" size={size} color={color} />
-              ),
-            }}
-          />
-          <Tabs.Screen
-            name="saved"
-            options={{
-              animation: "fade",
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="bookmark-outline" size={size} color={color} />
-              ),
+              tabBarIcon: ({ color, size, focused }) =>
+                tabBarIconHandler(focused, color, size, "home-outline"),
             }}
           />
           <Tabs.Screen
             name="search"
             options={{
+              title: "Search",
               animation: "fade",
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="search-outline" size={size} color={color} />
-              ),
+              tabBarIcon: ({ color, size, focused }) =>
+                tabBarIconHandler(focused, color, size, "search-outline"),
+            }}
+          />
+          <Tabs.Screen
+            name="saved"
+            options={{
+              title: "Saved",
+              animation: "fade",
+              tabBarIcon: ({ color, size, focused }) =>
+                tabBarIconHandler(focused, color, size, "bookmark-outline"),
+            }}
+          />
+          <Tabs.Screen
+            name="profile"
+            options={{
+              title: "Profile",
+              animation: "fade",
+              tabBarIcon: ({ color, size, focused }) =>
+                tabBarIconHandler(focused, color, size, "person-outline"),
             }}
           />
         </Tabs>

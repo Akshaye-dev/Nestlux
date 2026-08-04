@@ -37,8 +37,15 @@ const FeaturedProperties = () => {
         <Text className="text-lg font-plus-jakarta-sans-semi-bold">
           {AppStrings.home.featuredProperties}
         </Text>
-        <Text className="text-sm font-plus-jakarta-sans-semi-bold text-accent">
+
+        <Text className="text-sm font-plus-jakarta-sans-semi-bold text-accent ">
           {AppStrings.home.seeAll}
+          <Ionicons
+            name="chevron-forward"
+            size={10}
+            color={AppColors.accent}
+            style={{ alignSelf: "center", marginLeft: 2 }}
+          />
         </Text>
       </View>
 
@@ -117,7 +124,7 @@ const FeaturedProperties = () => {
         onEndReachedThreshold={0.5} // Trigger loadMore when the user scrolls to 50% of the list
         ListFooterComponent={
           loadingMore ? (
-            <View className="flex-row justify-center items-center w-full py-4">
+            <View className="flex-row justify-center items-center flex-1 py-4">
               <ActivityIndicator size="small" color={AppColors.accent} />
             </View>
           ) : null

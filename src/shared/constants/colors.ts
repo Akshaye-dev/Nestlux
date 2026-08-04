@@ -6,6 +6,9 @@ export const AppColors = {
   surfaceSecondary: "#D5E0EA",
   text: "#18141A",
   textSecondary: "#A8B5DB",
+  rating: "#FBBF24",
+  ripple: "#E5E7EB",
+  rippleLogout: "#FEE2E2",
   input: {
     background: "#F3F3F3",
     text: "#666666",
