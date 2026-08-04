@@ -6,7 +6,7 @@ import UserProfileItems from "../components/UserProfileItems";
 
 const ProfileScreen = () => {
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-white ">
       <ProfileHeader />
       <ScrollView
         showsVerticalScrollIndicator={false}

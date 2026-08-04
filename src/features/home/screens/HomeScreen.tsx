@@ -2,6 +2,7 @@ import Search from "@/src/shared/components/Search";
 
 import { AppColors } from "@/src/shared/constants/colors";
 import { AppStrings } from "@/src/shared/constants/strings";
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import FeaturedProperties from "../components/FeaturedProperties";
@@ -28,7 +29,11 @@ const HomeScreen = () => {
     isFetching,
   } = useProperties({ featured: false, limit: 15, type: selectedCategory });
   const propertyCount = usePropertyCount(selectedCategory);
+  const router = useRouter();
 
+  const propertyHandler = (id: string) => {
+    router.push({ pathname: "/property/[id]", params: { id: id } });
+  };
   useEffect(() => {
     if (!isFetching) {
       setDisplayCategory(selectedCategory);
@@ -50,7 +55,7 @@ const HomeScreen = () => {
         <>
           <Header />
           <Search placeholder={AppStrings.search.placeholder} />
-          <FeaturedProperties />
+          <FeaturedProperties onPress={propertyHandler} />
           {loading && propertiesData.length === 0 ? (
             <PropertyCardSkeleton />
           ) : null}
