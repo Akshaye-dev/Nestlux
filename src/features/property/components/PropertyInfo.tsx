@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Property } from "../../home/models/domain/Property";
 import AgentCard from "./propertyTabs/AgentCard";
 import Amenities from "./propertyTabs/Amenities";
 import PropertyDetails from "./propertyTabs/PropertyDetails";
 import PropertyLocation from "./propertyTabs/PropertyLocation";
 
 const tabs = ["Overview", "Amenities", "Location"];
-const PropertyInfo = () => {
+const PropertyInfo = ({ property }: { property: Property }) => {
   const [activeTab, setActiveTab] = useState("Overview");
   return (
     <View className="flex-1 px-4 mt-6">
@@ -36,28 +37,27 @@ const PropertyInfo = () => {
               Overview
             </Text>
             <Text className="text-gray-600 text-sm font-plus-jakarta-sans">
-              This stunning penthouse offers breathtaking views of the city
-              skyline and is designed with modern elegance in mind. With
-              spacious living areas, high-end finishes, and state-of-the-art
-              appliances, this property provides the perfect blend of luxury and
-              comfort. Enjoy the convenience of being located in the heart of
-              the city, with easy access to shopping, dining, and entertainment
-              options.
+              {property.overview}
             </Text>
-            <PropertyDetails />
-            <AgentCard />
+            <PropertyDetails property={property} />
+            <AgentCard agent={property.agent[0]} />
           </View>
         )}
-        {activeTab === "Amenities" && <Amenities />}
+        {activeTab === "Amenities" && (
+          <Amenities amenities={property.amenities} />
+        )}
         {activeTab === "Location" && (
           <View>
             <Text className="text-base font-plus-jakarta-sans-semi-bold text-black mb-2">
               Property Location
             </Text>
             <Text className="text-gray-600 text-sm  font-plus-jakarta-sans">
-              123 Main Street, New York, NY 10001
+              {property.city}, {property.state}
             </Text>
-            <PropertyLocation lat={40.712} long={-74.006} />
+            <PropertyLocation
+              lat={property.latitude}
+              long={property.longitude}
+            />
           </View>
         )}
       </View>

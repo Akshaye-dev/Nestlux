@@ -1,10 +1,15 @@
 import Search from "@/src/shared/components/Search";
-
 import { AppColors } from "@/src/shared/constants/colors";
 import { AppStrings } from "@/src/shared/constants/strings";
-import { useRouter } from "expo-router";
+import { usePropertyNavigation } from "@/src/shared/hooks/usePropertyNavigation";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 import FeaturedProperties from "../components/FeaturedProperties";
 import Header from "../components/Header";
 import PicksCategoryList from "../components/picks/PicksCategoryList";
@@ -13,6 +18,7 @@ import { PropertyCardSkeleton } from "../components/skeleton/PicksPropertyCardSk
 import { useProperties } from "../hooks/useProperties";
 import { usePropertyCount } from "../hooks/usePropertyCount";
 import { propertyCategories } from "../mocks/propertyCategories";
+import { Property } from "../models/domain/Property";
 
 const propertyTypes = propertyCategories;
 const HomeScreen = () => {
@@ -29,10 +35,10 @@ const HomeScreen = () => {
     isFetching,
   } = useProperties({ featured: false, limit: 15, type: selectedCategory });
   const propertyCount = usePropertyCount(selectedCategory);
-  const router = useRouter();
+  const { openedProperty } = usePropertyNavigation();
 
-  const propertyHandler = (id: string) => {
-    router.push({ pathname: "/property/[id]", params: { id: id } });
+  const propertyPressHandler = (property: Property) => {
+    openedProperty(property);
   };
   useEffect(() => {
     if (!isFetching) {
@@ -55,7 +61,7 @@ const HomeScreen = () => {
         <>
           <Header />
           <Search placeholder={AppStrings.search.placeholder} />
-          <FeaturedProperties onPress={propertyHandler} />
+          <FeaturedProperties onPress={propertyPressHandler} />
           {loading && propertiesData.length === 0 ? (
             <PropertyCardSkeleton />
           ) : null}
@@ -78,7 +84,13 @@ const HomeScreen = () => {
       }
       renderItem={({ item }) => (
         <View className="flex-1">
-          <PropertyCard property={item} />
+          <Pressable
+            onPress={() => propertyPressHandler(item)}
+            android_ripple={{ color: "#D1D5DB", foreground: true }}
+            className="rounded-3xl overflow-hidden"
+          >
+            <PropertyCard property={item} />
+          </Pressable>
         </View>
       )}
       onEndReached={() => {

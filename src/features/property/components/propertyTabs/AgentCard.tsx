@@ -5,16 +5,26 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-const AgentCard = () => {
+const AgentCard = ({
+  agent,
+}: {
+  agent: { name: string; position: string };
+}) => {
   return (
     <View className="flex-row px-4 mt-8 bg-gray-50 border border-gray-200 rounded-2xl py-3 justify-between items-center">
       <Image source={Images.background} className="w-14 h-14 rounded-full" />
       <View className="flex-1 ml-2">
-        <Text className="text-base text-black font-plus-jakarta-sans-semi-bold">
-          John Doe
+        <Text
+          className="text-base text-black font-plus-jakarta-sans-semi-bold"
+          numberOfLines={1}
+        >
+          {agent.name}
         </Text>
-        <Text className="text-sm text-gray-600 font-plus-jakarta-sans">
-          Real Estate Agent
+        <Text
+          className="text-sm text-gray-600 font-plus-jakarta-sans"
+          numberOfLines={1}
+        >
+          {agent.position}
         </Text>
         <View className="flex-row items-center ">
           <Image source={Icons.startIcon} className="w-3 h-3 " />

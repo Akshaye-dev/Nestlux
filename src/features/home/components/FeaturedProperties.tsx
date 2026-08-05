@@ -16,9 +16,10 @@ import { formatPrice } from "../utils/formatPrice";
 
 import { AppColors } from "@/src/shared/constants/colors";
 import { useProperties } from "../hooks/useProperties";
+import { Property } from "../models/domain/Property";
 import { FeaturedSkeleton } from "./skeleton/FeaturedSkeleton";
 type FeaturedPropertiesProps = {
-  onPress: (id: string) => void;
+  onPress: (property: Property) => void;
 };
 const FeaturedProperties = ({ onPress }: FeaturedPropertiesProps) => {
   const {
@@ -60,7 +61,7 @@ const FeaturedProperties = ({ onPress }: FeaturedPropertiesProps) => {
         renderItem={({ item }) => (
           <Pressable
             onPress={() => {
-              onPress(item.id);
+              onPress(item);
             }}
             android_ripple={{
               color: "#D1D5DB",

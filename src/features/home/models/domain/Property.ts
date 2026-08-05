@@ -12,4 +12,18 @@ export interface Property {
   noOfBathrooms: number;
   noOfBedrooms: number;
   areaSqFt: number;
+  agent: [
+    {
+      name: string;
+      position: string;
+    },
+  ];
+  city: string;
+  amenities: string[];
+  images: string[];
+  latitude: number;
+  longitude: number;
+  overview: string;
+  state: string;
+  yearBuilt: number;
 }

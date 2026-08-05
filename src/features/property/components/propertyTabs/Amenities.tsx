@@ -11,7 +11,7 @@ const amenitiesData = [
   { id: "6", name: "Security" },
   { id: "7", name: "Elevator" },
 ];
-const Amenities = () => {
+const Amenities = ({ amenities }: { amenities: string[] }) => {
   return (
     <View>
       <Text className="text-base font-plus-jakarta-sans-semi-bold text-black mb-2">
@@ -19,7 +19,7 @@ const Amenities = () => {
       </Text>
 
       <FlatList
-        data={amenitiesData}
+        data={amenities}
         numColumns={2}
         columnWrapperStyle={{
           marginBottom: 10,
@@ -30,11 +30,11 @@ const Amenities = () => {
         renderItem={({ item }) => {
           return (
             <View className="w-[48%]">
-              <AmenitiesCard name={item.name} icon="" />
+              <AmenitiesCard name={item} icon="" />
             </View>
           );
         }}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );

@@ -12,4 +12,15 @@ export interface ApiProperty {
   bathrooms: number;
   bedrooms: number;
   areaSqFt: number;
+  agent: {
+    name: string;
+    position: string;
+  };
+  features: string[];
+  images: string[];
+  latitude: number;
+  longitude: number;
+  overview: string;
+  state: string;
+  yearBuilt: number;
 }

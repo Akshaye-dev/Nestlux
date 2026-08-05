@@ -3,15 +3,15 @@ export const getGreeting = () => {
   if (hour < 12) {
     return {
       text: "Good Morning",
-      icon: "sunny",
+      icon: "partly-sunny",
       color: "#FFA500",
     };
   }
 
-  if (hour < 17) {
+  if (hour < 16) {
     return {
       text: "Good Afternoon",
-      icon: "partly-sunny",
+      icon: "sunny",
       color: "#FFD700",
     };
   }
