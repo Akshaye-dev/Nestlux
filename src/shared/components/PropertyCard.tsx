@@ -2,18 +2,20 @@ import { AppColors } from "@/src/shared/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Image, ImageBackground, Text, View } from "react-native";
-import { Property } from "../models/domain/Property";
-import { formatPrice } from "../utils/formatPrice";
-import { listingColors } from "../utils/listingColors";
+import { Property } from "../../features/home/models/domain/Property";
+import { formatPrice } from "../../features/home/utils/formatPrice";
+import { listingColors } from "../../features/home/utils/listingColors";
 
 import { Icons } from "@/src/shared/assets/icons";
+import { auth } from "../services/firebase/firebase";
 
 type PropertyCardProps = {
   property: Property;
 };
 const PropertyCard = ({ property }: PropertyCardProps) => {
+  const userId = auth.currentUser?.uid;
   return (
-    <View className=" bg-gray-100 elevation-sm">
+    <View className=" bg-gray-100 elevation-sm ">
       <ImageBackground className="h-44" source={{ uri: property.imageUrl }}>
         <View className="flex-row justify-between items-center p-2">
           <View
@@ -32,9 +34,17 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
           <View className="items-center justify-center px-2 py-1">
             <View className="w-7 h-7 rounded-full bg-white absolute" />
             <Ionicons
-              name={property.isFavorite ? "heart" : "heart-outline"}
+              name={
+                userId && property.favorites?.[userId]
+                  ? "heart"
+                  : "heart-outline"
+              }
               size={16}
-              color={property.isFavorite ? "red" : AppColors.gray[700]}
+              color={
+                userId && property.favorites?.[userId]
+                  ? AppColors.red
+                  : AppColors.gray[700]
+              }
             />
           </View>
         </View>

@@ -15,6 +15,8 @@ export function mapProperty(apiProperty: ApiProperty): Property {
     listingType: apiProperty.listingType,
     noOfBathrooms: apiProperty.bathrooms,
     noOfBedrooms: apiProperty.bedrooms,
+    isFavorite: apiProperty.isFavorite,
+    favorites: apiProperty.favorites,
     areaSqFt: apiProperty.areaSqFt,
     agent: [
       {

@@ -98,4 +98,17 @@ export const AppStrings = {
     logout: "Sign Out",
   },
   error: "error",
+  bedrooms: "Bedrooms",
+  bathrooms: "Bathrooms",
+  price: "Price",
+  filters: "Filters",
+  propertyType: "Property Type",
+  priceRange: "Price Range",
+  sortBy: "Sort By",
+  sortOptions: {
+    priceLowToHigh: "Price: Low to High",
+    priceHighToLow: "Price: High to Low",
+  },
+  apply: "Apply",
+  reset: "Reset",
 };

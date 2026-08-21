@@ -11,6 +11,8 @@ export interface ApiProperty {
   propertyType: string;
   bathrooms: number;
   bedrooms: number;
+  isFavorite: boolean;
+  favorites: Record<string, boolean>;
   areaSqFt: number;
   agent: {
     name: string;

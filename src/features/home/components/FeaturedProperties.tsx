@@ -1,7 +1,7 @@
 import { Icons } from "@/src/shared/assets/icons";
 import { AppStrings } from "@/src/shared/constants/strings";
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -15,13 +15,17 @@ import {
 import { formatPrice } from "../utils/formatPrice";
 
 import { AppColors } from "@/src/shared/constants/colors";
-import { useProperties } from "../hooks/useProperties";
+import { auth } from "@/src/shared/services/firebase/firebase";
+import { useProperties } from "../../../shared/hooks/useProperties";
+import { PropertyFilters } from "../../search/types/filters";
 import { Property } from "../models/domain/Property";
 import { FeaturedSkeleton } from "./skeleton/FeaturedSkeleton";
 type FeaturedPropertiesProps = {
   onPress: (property: Property) => void;
 };
 const FeaturedProperties = ({ onPress }: FeaturedPropertiesProps) => {
+  const userId = auth.currentUser?.uid;
+  const [filters, setFilters] = useState<PropertyFilters>({});
   const {
     propertiesData,
     loading,
@@ -30,11 +34,20 @@ const FeaturedProperties = ({ onPress }: FeaturedPropertiesProps) => {
     loadMore,
     error,
     isFetching,
-  } = useProperties({ featured: true, limit: 7 });
+  } = useProperties(filters);
+
+  useEffect(() => {
+    setFilters({
+      featured: true,
+      limit: 15,
+      propertyType: "all",
+    });
+  }, []);
 
   if (loading && propertiesData.length === 0) {
     return <FeaturedSkeleton />;
   }
+
   return (
     <View className="mt-4 w-full justify-between items-center">
       <View className="flex-row w-full justify-between items-center">
@@ -84,9 +97,15 @@ const FeaturedProperties = ({ onPress }: FeaturedPropertiesProps) => {
                   <View className="items-center justify-center p-1 ">
                     <View className="w-8 h-8 rounded-full bg-input-background opacity-50 absolute" />
                     <Ionicons
-                      name={item.isFavorite ? "heart" : "heart-outline"}
+                      name={
+                        userId && item.favorites?.[userId]
+                          ? "heart"
+                          : "heart-outline"
+                      }
                       size={20}
-                      color={item.isFavorite ? "red" : "white"}
+                      color={
+                        userId && item.favorites?.[userId] ? "red" : "white"
+                      }
                       className="opacity-100"
                     />
                   </View>

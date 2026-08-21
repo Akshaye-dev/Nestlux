@@ -1,11 +1,12 @@
+import SavedScreen from "@/src/features/saved/screens/SavedScreen";
 import React from "react";
-import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Saved = () => {
   return (
-    <View>
-      <Text>Saved</Text>
-    </View>
+    <SafeAreaView className="flex-1 bg-white" edges={["top"]}>
+      <SavedScreen />
+    </SafeAreaView>
   );
 };
 

@@ -10,14 +10,15 @@ import {
   Text,
   View,
 } from "react-native";
+import PropertyCard from "../../../shared/components/PropertyCard";
+import { useProperties } from "../../../shared/hooks/useProperties";
+import { usePropertyCount } from "../../../shared/hooks/usePropertyCount";
+import { propertyCategories } from "../../../shared/mock/filtersData";
+import { PropertyFilters } from "../../search/types/filters";
 import FeaturedProperties from "../components/FeaturedProperties";
 import Header from "../components/Header";
 import PicksCategoryList from "../components/picks/PicksCategoryList";
-import PropertyCard from "../components/PropertyCard";
 import { PropertyCardSkeleton } from "../components/skeleton/PicksPropertyCardSkeleton";
-import { useProperties } from "../hooks/useProperties";
-import { usePropertyCount } from "../hooks/usePropertyCount";
-import { propertyCategories } from "../mocks/propertyCategories";
 import { Property } from "../models/domain/Property";
 
 const propertyTypes = propertyCategories;
@@ -25,6 +26,7 @@ const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [displayCategory, setDisplayCategory] = useState("all");
   const [displayCount, setDisplayCount] = useState(0);
+  const [filters, setFilters] = useState<PropertyFilters>({});
   const {
     propertiesData,
     loading,
@@ -33,12 +35,21 @@ const HomeScreen = () => {
     loadMore,
     error,
     isFetching,
-  } = useProperties({ featured: false, limit: 15, type: selectedCategory });
+  } = useProperties(filters);
   const propertyCount = usePropertyCount(selectedCategory);
   const { openedProperty } = usePropertyNavigation();
 
   const propertyPressHandler = (property: Property) => {
     openedProperty(property);
+  };
+
+  const categoryFilterHandler = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    setFilters({
+      featured: false,
+      limit: 15,
+      propertyType: categoryId,
+    });
   };
   useEffect(() => {
     if (!isFetching) {
@@ -60,7 +71,11 @@ const HomeScreen = () => {
       ListHeaderComponent={
         <>
           <Header />
-          <Search placeholder={AppStrings.search.placeholder} />
+          <Search
+            placeholder={AppStrings.search.placeholder}
+            isRightIcon={true}
+            isEditable={false}
+          />
           <FeaturedProperties onPress={propertyPressHandler} />
           {loading && propertiesData.length === 0 ? (
             <PropertyCardSkeleton />
@@ -68,7 +83,7 @@ const HomeScreen = () => {
           <PicksCategoryList
             propertyTypes={propertyTypes}
             isFetching={isFetching}
-            onPress={(categoryId) => setSelectedCategory(categoryId)}
+            onPress={categoryFilterHandler}
           />
 
           <View className="flex-row justify-between items-center mt-4">

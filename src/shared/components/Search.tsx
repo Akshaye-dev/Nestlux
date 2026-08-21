@@ -10,6 +10,8 @@ type SearchProps = {
   value?: string;
   keyboardType?: KeyboardTypeOptions;
   secureTextEntry?: boolean;
+  isRightIcon?: boolean;
+  isEditable?: boolean;
 };
 
 const Search = ({
@@ -18,6 +20,9 @@ const Search = ({
   value,
   keyboardType,
   secureTextEntry,
+  isRightIcon,
+  isEditable = true,
+  onSearch,
 }: SearchProps) => {
   const router = useRouter();
   return (
@@ -42,12 +47,14 @@ const Search = ({
           keyboardType={keyboardType}
           secureTextEntry={secureTextEntry}
           value={value}
-          editable={false}
+          editable={isEditable}
         />
 
-        <View className="rounded-full p-1 bg-accent mr-2">
-          <Ionicons name="options" size={24} color="white" />
-        </View>
+        {isRightIcon && (
+          <View className="rounded-full p-1 bg-accent mr-2">
+            <Ionicons name="options" size={24} color="white" />
+          </View>
+        )}
       </View>
     </Pressable>
   );

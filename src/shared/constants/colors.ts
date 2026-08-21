@@ -24,6 +24,7 @@ export const AppColors = {
     200: "#0f0d23",
   },
 
+  red: "#FF0000",
   white: "#FFFFFF",
   black: "#000000",
   offWhite: "#F4F1EB",

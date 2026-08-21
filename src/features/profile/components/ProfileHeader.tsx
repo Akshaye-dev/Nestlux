@@ -28,9 +28,6 @@ const ProfileHeader = () => {
       </View>
       <View className="bg-accentLight h-36 w-36 opacity-15 rounded-full absolute -top-16 -right-8 " />
       <Ionicons name="pencil" size={14} color="#F5F5F5" className="ml-2" />
-      {/* <View className="bg-accentLight opacity-15 p-2 size-8 absolute rounded-full  " />
-      <View className="bg-accentLight h-36 w-36 opacity-15 rounded-full absolute -top-16 -right-8 " /> */}
-
       <View
         onLayout={(e) => setCardHeight(e.nativeEvent.layout.height)}
         className="flex-row bg-white  py-4 px-2 mx-4 rounded-2xl elevation-md items-center"

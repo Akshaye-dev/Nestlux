@@ -1,8 +1,10 @@
 import { AppColors } from "@/src/shared/constants/colors";
+import { useFavoriteProperties } from "@/src/shared/hooks/useFavoriteProperties";
+import { auth } from "@/src/shared/services/firebase/firebase";
 import { handleShare } from "@/src/shared/utils/share";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Dimensions,
   FlatList,
@@ -16,10 +18,12 @@ import { Carousel, CarouselRef } from "react-native-reanimated-carousel";
 import { Property } from "../../home/models/domain/Property";
 
 const PropertyGallery = ({ property }: { property: Property }) => {
+  const userId = auth.currentUser?.uid;
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef<CarouselRef>(null);
-  const [isSaved, setIsSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState(property.isFavorite);
   const router = useRouter();
+  const { toggleFavorite } = useFavoriteProperties();
 
   const backHandler = () => {
     if (router.canGoBack()) {
@@ -27,8 +31,16 @@ const PropertyGallery = ({ property }: { property: Property }) => {
     }
   };
 
+  useEffect(() => {
+    setIsSaved((userId && property.favorites?.[userId]) || false);
+  }, []);
+
   const saveHandler = () => {
-    setIsSaved(!isSaved);
+    const newSaved = !isSaved;
+    console.log("saved1:", isSaved);
+    setIsSaved(newSaved);
+    console.log("saved2:", isSaved);
+    toggleFavorite(property.id, newSaved);
   };
 
   return (
@@ -86,7 +98,7 @@ const PropertyGallery = ({ property }: { property: Property }) => {
               <Ionicons
                 name={isSaved ? "heart" : "heart-outline"}
                 size={18}
-                color={isSaved ? AppColors.accent : AppColors.white}
+                color={isSaved ? AppColors.red : AppColors.white}
               />
             </View>
           </Pressable>

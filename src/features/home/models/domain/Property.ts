@@ -11,6 +11,8 @@ export interface Property {
   listingType: string;
   noOfBathrooms: number;
   noOfBedrooms: number;
+  isFavorite: boolean;
+  favorites: Record<string, boolean>;
   areaSqFt: number;
   agent: [
     {

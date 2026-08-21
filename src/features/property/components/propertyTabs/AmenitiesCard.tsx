@@ -9,11 +9,14 @@ type AmenitiesCardProps = {
 
 const AmenitiesCard = ({ name, icon }: AmenitiesCardProps) => {
   return (
-    <View className="flex-row p-4 bg-gray-50 rounded-2xl gap-2 border border-gray-200 items-center">
+    <View className="flex-row  p-3 bg-gray-50 rounded-2xl gap-2 border border-gray-200 items-center">
       <Ionicons name="checkmark-circle-outline" size={20} color={"#4CAF50"} />
-      <Text className="text-sm text-black font-plus-jakarta-sans-semi-bold">
-        {name}
-      </Text>
+
+      <View className="flex-1">
+        <Text className="text-sm text-black font-plus-jakarta-sans-semi-bold">
+          {name}
+        </Text>
+      </View>
     </View>
   );
 };

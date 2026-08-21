@@ -1,5 +1,6 @@
 import { mapProperty } from "@/src/features/home/mapper/propertyMapper";
 import { ApiProperty } from "@/src/features/home/models/api/ApiProperty";
+import { PropertyFilters } from "@/src/features/search/types/filters";
 import { firestoreDB } from "@/src/shared/services/firebase/firebase";
 
 import {
@@ -11,11 +12,6 @@ import {
   startAfter,
   where,
 } from "firebase/firestore";
-type PropertyFilters = {
-  type?: string;
-  featured?: boolean;
-  limit?: number;
-};
 
 type FetchPropertiesParams = {
   filters: PropertyFilters;
@@ -27,13 +23,38 @@ export const fetchInfiniteProperties = async ({
   pageParam,
 }: FetchPropertiesParams) => {
   let q = query(collection(firestoreDB, "properties"));
-
-  if (filters.type && filters.type !== "all") {
-    // Check if the type filter is provided and not equal to "all"
-    q = query(q, where("category", "==", filters.type));
+  console.log("filters Firestore::::selected", filters);
+  if (filters.propertyType === "Rent" || filters.propertyType === "Sale") {
+    console.log("filters Firestore::::selected", filters.propertyType);
+    q = query(q, where("listingType", "==", filters.propertyType));
+  } else if (filters.propertyType && filters.propertyType !== "all") {
+    q = query(q, where("category", "==", filters.propertyType));
   }
+
   if (filters.featured) {
     q = query(q, where("propertyType", "==", "Featured"));
+  }
+
+  if (filters.noOfBedrooms !== undefined) {
+    q = query(q, where("bedrooms", "==", filters.noOfBedrooms));
+  }
+
+  if (filters.minPrice !== undefined && filters.maxPrice !== undefined) {
+    q = query(
+      q,
+      where("price", ">=", Number(filters.minPrice)),
+      where("price", "<=", Number(filters.maxPrice)),
+    );
+  }
+
+  if (filters.searchQuery && filters.searchQuery.trim() !== "") {
+    const searchQuery = filters.searchQuery.trim();
+
+    q = query(
+      q,
+      where("city", ">=", searchQuery),
+      where("city", "<=", searchQuery + "\uf8ff"),
+    );
   }
 
   const pageSize = filters.limit || 10;
@@ -43,24 +64,30 @@ export const fetchInfiniteProperties = async ({
     q = query(q, startAfter(pageParam));
   }
 
-  const querySnapshot = await getDocs(q);
+  try {
+    const querySnapshot = await getDocs(q);
+    console.log("querySnapshot Firestore::::selected", querySnapshot.size);
 
-  const propertiesList: ApiProperty[] = [];
-  querySnapshot.forEach((docSnap) => {
-    const rawData = docSnap.data() as Omit<ApiProperty, "id">;
-    propertiesList.push({
-      id: docSnap.id,
-      ...rawData,
+    const propertiesList: ApiProperty[] = [];
+    querySnapshot.forEach((docSnap) => {
+      const rawData = docSnap.data() as Omit<ApiProperty, "id">;
+      propertiesList.push({
+        id: docSnap.id,
+        ...rawData,
+      });
     });
-  });
 
-  const formattedProperties = propertiesList.map(mapProperty);
+    const formattedProperties = propertiesList.map(mapProperty);
 
-  const lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+    const lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
 
-  return {
-    properties: formattedProperties,
-    nextCursor: lastVisibleDoc,
-    hasMore: querySnapshot.docs.length === pageSize,
-  };
+    return {
+      properties: formattedProperties,
+      nextCursor: lastVisibleDoc,
+      hasMore: querySnapshot.docs.length === pageSize,
+    };
+  } catch (error) {
+    console.error("Error fetching properties:", error);
+    throw error;
+  }
 };

@@ -1,9 +1,9 @@
 import { firestoreDB } from "@/src/shared/services/firebase/firebase";
 import {
-    collection,
-    getCountFromServer,
-    query,
-    where,
+  collection,
+  getCountFromServer,
+  query,
+  where,
 } from "firebase/firestore";
 
 export async function getPropertyCount(category: string) {
@@ -13,6 +13,8 @@ export async function getPropertyCount(category: string) {
 
   if (category === "all") {
     q = query(propertiesRef);
+  } else if (category === "Rent" || category === "Sale") {
+    q = query(propertiesRef, where("listingType", "==", category));
   } else {
     q = query(propertiesRef, where("category", "==", category));
   }

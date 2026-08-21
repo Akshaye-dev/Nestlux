@@ -1,12 +1,10 @@
 import { fetchInfiniteProperties } from "@/src/entities/properties/propertiesApi";
+import { PropertyFilters } from "@/src/features/search/types/filters";
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { QueryDocumentSnapshot } from "firebase/firestore";
-type PropertyFilters = {
-  type?: string;
-  featured?: boolean;
-  limit?: number;
-};
+
 export function useProperties(filters: PropertyFilters) {
+  console.log("filters::::selected", "CHECKC");
   const {
     data: properties,
     isLoading,
@@ -17,7 +15,11 @@ export function useProperties(filters: PropertyFilters) {
     hasNextPage,
   } = useInfiniteQuery({
     queryKey: ["properties", filters],
-    queryFn: ({ pageParam }) => fetchInfiniteProperties({ filters, pageParam }),
+    queryFn: ({ pageParam }) => {
+      console.log("🔥 Query triggered!");
+      console.trace();
+      return fetchInfiniteProperties({ filters, pageParam });
+    },
     placeholderData: keepPreviousData,
     initialPageParam: undefined as QueryDocumentSnapshot | undefined,
     getNextPageParam: (lastPage) => {
